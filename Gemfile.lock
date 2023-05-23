@@ -130,6 +130,9 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     thor (1.2.2)
     timeout (0.3.2)
     turbo-rails (1.4.0)
@@ -148,6 +151,7 @@ PLATFORMS
 
 DEPENDENCIES
   rails
+  simple_form (~> 5.1.0)
   turbo-rails (~> 1.0)
 
 BUNDLED WITH
