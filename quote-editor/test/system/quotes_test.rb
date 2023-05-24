@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class QuotesTest < ApplicationSystemTestCase
+  # Change :chrome with :healdess_chrome
+  driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   setup do
     @quote = quotes(:first)
   end
