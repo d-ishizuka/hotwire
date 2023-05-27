@@ -1,32 +1,8 @@
 require "application_system_test_case"
 
 class QuotesTest < ApplicationSystemTestCase
-  # Change :chrome with :healdess_chrome
-  driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   setup do
     @quote = quotes(:first)
-  end
-  
-  test "Creating a new quote" do 
-    # When we visit the Quotes#index page
-    # we expect to see a title with the text "Quotes"
-    visit quotes_path
-    assert_selector "h1", text: "Quotes"
-
-    # When we click on the link with the tet "New Quote"
-    # we expect to land on a page with the title "New Quote"
-    click_on "New quote"
-    assert_selector "h1", text: "New quote"
-
-    # When we fill in the name input with "Capybara Quote"
-    # and we click on "Create Quote"
-    fill_in "Name", with: "Capybara Quote"
-    click_on "Create Quote"
-
-    # We expect to be back on the page with the title "Quotes"
-    # and to see our "Capybara Quote" in the list of quotes
-    assert_selector "h1", text: "Quotes"
-    assert_text "Capybara Quote"
   end
 
   test "Showing a quote" do
@@ -36,15 +12,29 @@ class QuotesTest < ApplicationSystemTestCase
     assert_selector "h1", text: @quote.name
   end
 
+  test "Creating a new quote" do
+    visit quotes_path
+    assert_selector "h1", text: "Quotes"
+
+    click_on "New quote"
+    fill_in "Name", with: "Capybara quote"
+
+    assert_selector "h1", text: "Quotes"
+    click_on "Create quote"
+
+    assert_selector "h1", text: "Quotes"
+    assert_text "Capybara quote"
+  end
+
   test "Updating a quote" do
     visit quotes_path
     assert_selector "h1", text: "Quotes"
 
     click_on "Edit", match: :first
-    assert_selector "h1", text: "Edit quote"
-
     fill_in "Name", with: "Updated quote"
-    click_on "Update Quote"
+
+    assert_selector "h1", text: "Quotes"
+    click_on "Update quote"
 
     assert_selector "h1", text: "Quotes"
     assert_text "Updated quote"
